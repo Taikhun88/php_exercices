@@ -109,17 +109,38 @@ print_r($displayBrowser);
         echo "Here below is the extension of the running file with the pathingo function with 2nd paramaeter PATHINFO EXTENSION<br>";
         $fileExtension = print_r(pathinfo($path = "C:\wamp64\www\php_practice\\exo\\exercices.php", PATHINFO_EXTENSION)); // displays dirname, extension, filename and basename 
         echo "<br>--------<br>";
-        
+
         $path = "C:\wamp64\www\php_practice\\exo\\exercices.php";
         $fileName = basename($path);
+
+        // Other possibility $current_file_name = basename($_SERVER['PHP_SELF']);
+
         echo "<br>Here below is the filename returned with basename function <br>" . $fileName;
         echo "<br>--------<br>";
         ?>
     </pre>
 
     <h3>Exo 8 - Récupérer le nom du fichier actuel</h3>
+    <?php
+    $url = "https://www.php.net/manual/fr/function.parse-url.php";
+    $url = parse_url("https://www.php.net/manual/fr/function.parse-url.php");
+    // When 2nd parameter is filled then the function returns a string therefore we display content with echo instruction.
+    // $urlScheme = parse_url($url, PHP_URL_SCHEME); // it's mandatory to specify 1st parameter but not 2nd parameter
+    // $urlHost = parse_url($url, PHP_URL_HOST);
+    // $urlPath = parse_url($url, PHP_URL_PATH);
+    // echo "Scheme <br>" . $urlScheme . "<br>--------<br>";
+    // echo "Host <br>" . $urlHost . "<br>--------<br>";
+    // echo "Path <br>" . $urlPath . "<br>--------<br>";
+    echo "Voici en une seule ligne de code l'affichage respectif des SCHEME, HOST et PATH de l'url <br>" . $url['scheme'] . " et " . $url['host'] . " et " . $url['path']
 
+    // better is to store the url in variable and as it's an array well the values via index like in this proposition
+    // $url = 'https://www.w3resource.com/php-exercises/php-basic-exercises.php';
+    // $url = parse_url($url);
+    // echo 'Scheme : ' . $url['scheme'] . "\n";
+    // echo 'Host : ' . $url['host'] . "\n";
+    // echo 'Path : ' . $url['path'] . "\n";
 
+    ?>
     <script src="index.js"></script>
 </body>
 
