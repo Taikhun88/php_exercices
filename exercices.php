@@ -186,7 +186,8 @@ print_r($displayBrowser);
 
     ?>
 
-    <h3>Exo 12 - </h3>
+    <h3>Exo 12 - Vérifier la validité d'un email </h3>
+    <!-- https://www.delftstack.com/fr/howto/php/php-validation-email/ -->
     <form action="" method="POST">
         <label for="email">Votre email</label>
         <input type="email" name="email" id="email">
@@ -195,7 +196,6 @@ print_r($displayBrowser);
     <?php        
         if (isset($_POST['email'])) {
             $email = $_POST['email'];
-
             if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 echo "Votre adresse email est elle bien la suivante : " . $email;
             }
