@@ -17,4 +17,4 @@ else{
 }
 
 btnName.addEventListener('click',() => toHideAndShow(btnName,element))
-btnName.addEventListener('click',() => toHideAndShow(btnNameExo6,elementExo6))
+btnNameExo6.addEventListener('click',() => toHideAndShow(btnNameExo6,elementExo6))
