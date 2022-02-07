@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
+<h3>Exo 11 - Redirection header location ou Refresh</h3>
+<!-- Header is sent after a display request is being displayed. For example after echo instruction. Which is why we put this exo 11 before the HEAD html. Besides, the header location is immediately executed so to avoid this I have used refresh instead and set time to 5 sec before a kind of redirection -->
+<?php
+header("Refresh:60; exercices.php", TRUE, 307);
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -141,6 +146,62 @@ print_r($displayBrowser);
     // echo 'Path : ' . $url['path'] . "\n";
 
     ?>
+
+    <h3>Exo 9 - Changer la couleur de la première lettre</h3>
+    <?php
+
+    // Text to replace
+    $text = "PHP Tutorial";
+
+    // The preg_replace is used here to replace the
+    // color of first character of the word
+    $text = preg_replace(
+        '/(\b[a-z])/i',
+        '<span style="color:green;">\1</span>',
+        $text
+    );
+
+    // Display the text value
+    echo $text
+    ?>
+
+    <h3>Exo 10 - Vérifier si la page est appelée depuis une page sécurisée ou non sécurisée</h3>
+    <!-- <form action="" method="POST">
+    <label for="url">URL à vérifier</label>
+        <input type="url" name="url" id="url">
+        <button type="submit">Envoyer</button>
+    </form>
+
+    // if(isset($_POST['url']) && !empty($_POST['url'])) {
+    //     $url= $_POST['url'];
+    //     print_r($_SERVER['HTTPS']);
+    // } -->
+
+    <?php
+    if (!empty($_SERVER['HTTPS'])) {
+        echo "La page est bien accédée en HTTPS";
+    } else {
+        echo "La page n'est pas sécurisée";
+    }
+
+    ?>
+
+    <h3>Exo 12 - </h3>
+    <form action="" method="POST">
+        <label for="email">Votre email</label>
+        <input type="email" name="email" id="email">
+        <button type="submit" value="send">Envoyer</button>
+    </form>
+    <?php        
+        if (isset($_POST['email'])) {
+            $email = $_POST['email'];
+
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                echo "Votre adresse email est elle bien la suivante : " . $email;
+            }
+        }
+    ?>
+
     <script src="index.js"></script>
 </body>
 
