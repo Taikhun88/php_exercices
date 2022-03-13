@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -8,7 +10,7 @@
     <title>Authentification</title>
 </head>
 
-<body>
+<body></body>
     <nav>
         <a href="/authentication">Page d'accueil</a>
         <a href="/authentication/login.php">Se connecter</a>
@@ -19,6 +21,8 @@
 
     <h1>Mon profil</h1>
 
+    <h2>Bienvenue </h2>
+    
 </body>
 
 </html>
