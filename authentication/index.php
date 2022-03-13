@@ -10,11 +10,11 @@
 
 <body>
     <nav>
-        <a href="/authentication">Page d'accueil'</a>
+        <a href="/authentication">Page d'accueil</a>
         <a href="/authentication/login.php">Se connecter</a>
         <a href="/authentication/logout.php">Se déconnecter</a>
         <a href="/authentication/profile.php">Profil</a>
-        <a href="/authentication/register.php">S'inscrire'</a>
+        <a href="/authentication/register.php">S'inscrire</a>
     </nav>
 
     <h1>Homepage</h1>
