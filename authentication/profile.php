@@ -1,22 +1,11 @@
 <?php
-$pdo = require_once './database.php';
-$sessionId = $_COOKIE['session'] ?? 'vide';
-// var_dump($sessionId);
-if ($sessionId) {
-  $sessionsStatement = $pdo->prepare('SELECT * FROM session WHERE id=?');
-  $sessionsStatement->execute([$sessionId]);
-  $session = $sessionsStatement->fetch();
+require_once './is_logged_in.php';
 
-  if ($session) {
-    $userStatement = $pdo->prepare('SELECT * FROM user WHERE id=?');
-    $userStatement->execute([$session['userid']]);
-    $user = $userStatement->fetch();
-  }
-}
-
-if (!$user) {
+$currentUser = isLoggedIn();
+if (!$currentUser) {
   header('Location: /authentication/login.php');
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +29,7 @@ if (!$user) {
 
     <h1>Mon profil</h1>
 
-    <h2>Bienvenue <?= $user['username'] ?> </h2>
+    <h2>Bienvenue <?= $currentUser['username'] ?> </h2>
     
 </body>
 
