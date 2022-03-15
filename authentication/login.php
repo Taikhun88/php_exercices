@@ -1,41 +1,40 @@
-<?php 
+<?php
 $pdo = require_once './database.php';
 
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $input = filter_input_array(INPUT_POST, [
-        'email' => FILTER_SANITIZE_EMAIL, 
+        'email' => FILTER_SANITIZE_EMAIL,
     ]);
-    
+
     $password = $_POST['password'] ?? '';
     $email = $input['email'] ?? '';
 
     if (!$password || !$email) {
-        $error = 'ERROR';
-    }  else {
+        $error = 'Veuillez remplir tous les champs requis';
+    } else {
         $statementUser = $pdo->prepare('SELECT * FROM user WHERE email=:email');
         $statementUser->bindValue(':email', $email);
         $statementUser->execute();
-        
+
         $user = $statementUser->fetch();
+        // var_dump($user);
+        // exit();
         // when proceeding with test if password is clear and not hashed the result return will be the else case
         if (password_verify($password, $user['password'])) {
             $statementSession = $pdo->prepare('INSERT INTO session VALUES (DEFAULT, 
                 :userid)');
-                $statementSession->bindValue(':userid', $user['id']);
-                $statementSession->execute();
+            $statementSession->bindValue(':userid', $user['id']);
+            $statementSession->execute();
 
-                $session = $pdo->lastInsertId();
-                setcookie('session', $sessionId, time() + 60 * 60 * 24 * 14, "", "", false, true);
+            $sessionId = $pdo->lastInsertId();
+            setcookie('session', $sessionId, time() + 60 * 60 * 24 * 14, "", "", false, true);
 
-                header('Location: /authentication/profile.php');
+            header('Location: /authentication/profile.php');
         } else {
             $error = "Mot de passe erroné";
         }
-        // var_dump($user);
-        // var_dump($password);
-
     }
 }
 
@@ -61,19 +60,21 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     </nav>
 
     <h1>Se connecter</h1>
+    <?php
+    // var_dump($email);
+    // var_dump($password);
+    ?>
 
     <form action="/authentication/login.php" method="POST">
-        <input type="text" placeholder="email" name="email">
+        <input type="email" placeholder="email" name="email">
         <br> <br>
         <input type="password" placeholder="password" name="password">
         <br> <br>
         <?php if ($error) : ?>
-            <h1 style = "color:red;"> <?= $error ?> </h1>
+            <h1 style="color:red;"> <?= $error ?> </h1>
         <?php endif; ?>
         <button>Envoyer</button>
     </form>
-
 </body>
 
 </html>
-

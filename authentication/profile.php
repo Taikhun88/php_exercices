@@ -1,7 +1,7 @@
 <?php
 $pdo = require_once './database.php';
 $sessionId = $_COOKIE['session'] ?? 'vide';
-var_dump($sessionId);
+// var_dump($sessionId);
 if ($sessionId) {
   $sessionsStatement = $pdo->prepare('SELECT * FROM session WHERE id=?');
   $sessionsStatement->execute([$sessionId]);
