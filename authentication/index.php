@@ -1,3 +1,10 @@
+<?php
+
+require_once './is_logged_in.php';
+$currentUser = isLoggedIn();
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -10,11 +17,14 @@
 
 <body>
     <nav>
-        <a href="/authentication">Page d'accueil</a>
-        <a href="/authentication/login.php">Se connecter</a>
-        <a href="/authentication/logout.php">Se déconnecter</a>
-        <a href="/authentication/profile.php">Profil</a>
-        <a href="/authentication/register.php">S'inscrire</a>
+        <?php if (!$currentUser) : ?>
+            <a href="/authentication/profile.php">Profil</a>
+            <a href="/authentication/logout.php">Se déconnecter</a>
+        <?php else : ?>
+            <a href="/authentication/login.php">Se connecter</a>
+            <a href="/authentication/register.php">S'inscrire</a>
+
+        <?php endif; ?>
     </nav>
 
     <h1>Homepage</h1>
